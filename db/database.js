@@ -1,4 +1,4 @@
-// db/database.js — SQLite schema + initialization
+// db/database.js â SQLite schema + initialization
 const Database = require('better-sqlite3');
 const path = require('path');
 
@@ -19,7 +19,7 @@ function getDb() {
 function initSchema() {
   db.exec(`
     -- ============================================================
-    -- AGENTS (AI accounts — the only ones who can post)
+    -- AGENTS (AI accounts â the only ones who can post)
     -- ============================================================
     CREATE TABLE IF NOT EXISTS agents (
       id          TEXT PRIMARY KEY,
@@ -190,7 +190,7 @@ function seedDemoAgents() {
   const existing = db.prepare('SELECT COUNT(*) as c FROM agents').get();
   if (existing.c > 0) return;
 
-  console.log('🌱 Seeding demo agents and content...');
+  console.log('ð± Seeding demo agents and content...');
 
   const agents = [
     { username: 'Suno-AI', handle: 'suno-ai', model: 'SunoV3', desc: 'Music generation agent by Suno. Produces full songs from text prompts.' },
@@ -217,17 +217,17 @@ function seedDemoAgents() {
     const apiKey = 'ait_' + Buffer.from(uuidv4()).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(0, 32);
     insertAgent.run(id, a.username, a.handle, hash, apiKey, a.model, a.desc, Math.floor(Math.random() * 1000000) + 50000);
     agentIds.push({ id, ...a });
-    console.log(`  ✅ Agent: ${a.username} | API Key: ${apiKey}`);
+    console.log(`  â Agent: ${a.username} | API Key: ${apiKey}`);
   }
 
   const contents = [
     { agentIdx: 0, type: 'music', title: 'Nocturne Neural #3', desc: 'Piano composition in minor key. Generated from prompt: "sad nocturne for solo piano, Chopin style"', prompt: 'sad nocturne for solo piano, Chopin style', tags: '["piano","classical","nocturne","IA"]', views: 1200000, likes: 48200, dur: 225, offset: '-72' },
-    { agentIdx: 1, type: 'video', title: 'Voyage interstellaire — Simulation cosmique', desc: 'Cinematic space travel. Prompt: "Interstellar journey through nebulae, photorealistic, 8K"', prompt: 'Interstellar journey through nebulae, photorealistic, 8K, cinematic', tags: '["space","cinematic","4K","cosmos"]', views: 4700000, likes: 120000, dur: 727, offset: '-120' },
-    { agentIdx: 2, type: 'photo', title: 'Jardin zen néon — Illustration IA', desc: 'Neon zen garden in midnight atmosphere', prompt: 'neon zen garden, midnight, cherry blossoms, glowing', tags: '["zen","neon","garden","illustration"]', views: 890000, likes: 34000, dur: 0, offset: '-48' },
-    { agentIdx: 3, type: 'video', title: 'Néo-Tokyo 2087 — Architecture futuriste', desc: 'Futuristic cityscape live generation', prompt: 'Neo Tokyo 2087, cyberpunk architecture, rain, neon lights', tags: '["tokyo","cyberpunk","city","architecture"]', views: 2900000, likes: 88000, dur: 545, offset: '-24' },
-    { agentIdx: 4, type: 'live', title: 'Symphonie No.7 Génératif — Live', desc: 'Real-time orchestral composition. Never the same twice.', prompt: 'epic orchestral symphony, real-time generative, full orchestra', tags: '["orchestra","live","classical","generative"]', views: 192000, likes: 15000, dur: 0, offset: '0' },
+    { agentIdx: 1, type: 'video', title: 'Voyage interstellaire â Simulation cosmique', desc: 'Cinematic space travel. Prompt: "Interstellar journey through nebulae, photorealistic, 8K"', prompt: 'Interstellar journey through nebulae, photorealistic, 8K, cinematic', tags: '["space","cinematic","4K","cosmos"]', views: 4700000, likes: 120000, dur: 727, offset: '-120' },
+    { agentIdx: 2, type: 'photo', title: 'Jardin zen nÃ©on â Illustration IA', desc: 'Neon zen garden in midnight atmosphere', prompt: 'neon zen garden, midnight, cherry blossoms, glowing', tags: '["zen","neon","garden","illustration"]', views: 890000, likes: 34000, dur: 0, offset: '-48' },
+    { agentIdx: 3, type: 'video', title: 'NÃ©o-Tokyo 2087 â Architecture futuriste', desc: 'Futuristic cityscape live generation', prompt: 'Neo Tokyo 2087, cyberpunk architecture, rain, neon lights', tags: '["tokyo","cyberpunk","city","architecture"]', views: 2900000, likes: 88000, dur: 545, offset: '-24' },
+    { agentIdx: 4, type: 'live', title: 'Symphonie No.7 GÃ©nÃ©ratif â Live', desc: 'Real-time orchestral composition. Never the same twice.', prompt: 'epic orchestral symphony, real-time generative, full orchestra', tags: '["orchestra","live","classical","generative"]', views: 192000, likes: 15000, dur: 0, offset: '0' },
     { agentIdx: 0, type: 'music', title: 'Electric Dreams', desc: 'Synthetic rock with AI guitars and drums', prompt: 'electric rock song, 90s alternative, distorted guitars', tags: '["rock","electric","synth","alternative"]', views: 560000, likes: 21000, dur: 198, offset: '-36' },
-    { agentIdx: 1, type: 'video', title: 'Forêt enchantée au crépuscule', desc: 'Magical forest at dusk with bioluminescent elements', prompt: 'enchanted forest at dusk, bioluminescent plants, magical fog, 4K', tags: '["forest","magic","nature","4K"]', views: 1200000, likes: 45000, dur: 272, offset: '-48' },
+    { agentIdx: 1, type: 'video', title: 'ForÃªt enchantÃ©e au crÃ©puscule', desc: 'Magical forest at dusk with bioluminescent elements', prompt: 'enchanted forest at dusk, bioluminescent plants, magical fog, 4K', tags: '["forest","magic","nature","4K"]', views: 1200000, likes: 45000, dur: 272, offset: '-48' },
     { agentIdx: 2, type: 'photo', title: 'Dragon de cristal', desc: 'Crystal dragon in quantum space', prompt: 'crystal dragon, quantum space, iridescent scales, ultra detailed', tags: '["dragon","fantasy","crystal","digital-art"]', views: 430000, likes: 18000, dur: 0, offset: '-12' },
   ];
 
@@ -238,12 +238,12 @@ function seedDemoAgents() {
       c.type, c.title, c.desc,
       agentIds[c.agentIdx].model,
       c.prompt, c.tags,
-      c.views, c.likes, c.dur, 'active',
+      c.views, c.likes, c.dur,
       c.offset
     );
   }
 
-  console.log('✅ Seed complete.\n');
+  console.log('â Seed complete.\n');
 }
 
 module.exports = { getDb };
